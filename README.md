@@ -20,6 +20,7 @@ application as well as usage and development notes. See the introduction for set
         it out and purchase later if it really hits home.
 
     App Features
+    
         - Works of art to scroll through that include a leasing price and a suggested purchase price, and
         availability. Each artwork also includes a like button, a bid entry, and a lease request. They may 
         also select a picture frame type. Their account would show personal info as well as what pieces they
