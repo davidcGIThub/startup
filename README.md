@@ -7,7 +7,7 @@ application as well as usage and development notes. See the introduction for set
  - I already knew how to use github so I did not learn very much. However it is nice to use GitLens 
  to resolve merge conflicts rather than doing it manually
 
- 2. Startup Deliverable
+2. Startup Deliverable
 
     Elevator Pitch
         - Circles is the app that gets you connected in the community. Sick and tired of social media, but still
@@ -24,3 +24,20 @@ application as well as usage and development notes. See the introduction for set
         
         - Stretch goal would be to expand the profile of each person so that they can find people with similar hobbies
         etc and connect directly with others.
+
+3. Amazon Web Services EC2
+
+    Elastic IP address: 3.134.54.227
+
+    ssh -i developer_key.pem ubuntu@3.134.54.227  // ssh into server
+
+    chmod 400 developer_key.pem    // this secures the key
+
+
+    I though it was interesting that an IP address only gets changed when the server gets restarted. 
+    
+    The Caddyfile is the configuration file for your web service gateway. 
+    
+    The public_html directory contains all of the static files that your are serving up directly through Caddy when using it as a web service.  
+    
+    The services directory is the place where you are going to install all of your web services once you build them. 
