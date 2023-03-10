@@ -766,7 +766,642 @@ JAVASCRIPT TYPE & CONSTRUCT
 		BigInt - num arbitrary mag
 		String - textual sequence of characters
 		Symbol - an unique value
+	OBJECTS
+		Object - A collection of properties represented by name value pairs {a:3, b:'fish'}
+		Function - object that can be called 	function a() {}
+		Date - calendar dates and times       new Date('1995-12-17')
+		Array - an ordered sequence of any type    [3, 'fish']
+		Map - collection of key value pairs    new Map()
+		Json -  lightweight data-interchange format    {"a":3, "b":"fish"}
+	TYPE CONVERSIONS
+		strict equality "===" "!=="
+	CONDITIONALS
+		if (a === 1) {
+		  //...
+		} else if (b === 2) {
+		  //...
+		} else {
+		  //...
+		  
+		  
+		Ternary operator
+		a === 1 ? console.log(1) : console.log('not 1');
+		
+		complex predicates
+		if (true && (!false || true)) {
+		  //...
+		}
+	LOOPS
+		for (let i = 0; i < 2; i++) {
+		  console.log(i);
+		}
+		// OUTPUT: 0 1
+		
+		
+		let i = 0;
+		do {
+		  console.log(i);
+		  i++;
+		} while (i < 2);
+		// OUTPUT: 0 1
+		
+		
+		let i = 0;
+		while (i < 2) {
+		  console.log(i);
+		  i++;
+		}
+		// OUTPUT: 0 1
+		
+		
+		const obj = { a: 1, b: 'fish' };
+		for (const name in obj) {
+		  console.log(name);
+		}
+		// OUTPUT: a
+		// OUTPUT: b
+		
+		
+		const arr = ['a', 'b'];
+		for (const name in arr) {
+		  console.log(name);
+		}
+		// OUTPUT: 0
+		// OUTPUT: 1
+		
+		
+		const arr = ['a', 'b'];
+		for (const val of arr) {
+		  console.log(val);
+		}
+		// OUTPUT: 'a'
+		// OUTPUT: 'b'
+		
+	BREAK AND CONTINUE
+		
+		let i = 0;
+		while (true) {
+		  console.log(i);
+		  if (i === 0) {
+		    i++;
+		    continue;
+		  } else {
+		    break;
+		  }
+		}
+		// OUTPUT: 0 1
+		  
+		 
+FUNCTIONS
+	In JavaScript functions are first class objects. That means that they can be assigned a name, passed as a parameter, returned as a result, and referenced from an object or array just like any other variable.
+	
+	function hello(who) {
+	  return 'hello ' + who;
+	}
+
+	console.log(hello('world'));
+	// OUTPUT: hello world
+	
+	ANONYMOUS FUNCTIONS
+	
+	// Function that takes a function as a parameter
+	function doMath(operation, a, b) {
+	  return operation(a, b);
+	}
+
+	// Anonymous function assigned to a variable
+	const add = function (a, b) {
+	  return a + b;
+	};
+
+	console.log(doMath(add, 5, 3));
+	// OUTPUT: 8
+
+	// Anonymous function assigned to a parameter
+	console.log(
+	  doMath(
+	    function (a, b) {
+	      return a - b;
+	    },
+	    5,
+	    3
+	  )
+	);
+	// OUTPUT: 2
 	
 	
+	CREATING PASSING AND RETURNING FUNCTIONS
+	
+	// Anonymous declaration of the function that is later assigned to a variable
+	const add = function (a, b) {
+	  return a + b;
+	};
+
+	// Function that logs as a side effect of its execution
+	function labeler(label, value) {
+	  console.log(label + '=' + value);
+	}
+
+	// Function that takes a function as a parameter and then executes the function as a side effect
+	function addAndLabel(labeler, label, adder, a, b) {
+	  labeler(label, adder(a, b));
+	}
+
+	// Passing a function to a function
+	addAndLabel(labeler, 'a+b', add, 1, 3);
+	// OUTPUT: a+b=4
+
+	// Function that returns a function
+	function labelMaker(label) {
+	  return function (value) {
+	    console.log(label + '=' + value);
+	  };
+	}
+
+	// Assign a function from the return value of the function
+	const nameLabeler = labelMaker('name');
+
+	// Calling the returned function
+	nameLabeler('value');
+	// OUTPUT: name=value
+	
+	
+	INNER FUNCTIONS
+	
+	function labeler(value) {
+	  function stringLabeler(value) {
+	    console.log('string=' + value);
+	  }
+	  function numberLabeler(value) {
+	    console.log('number=' + value);
+	  }
+
+	  if (typeof value == 'string') {
+	    stringLabeler(value);
+	  } else if (typeof value == 'number') {
+	    numberLabeler(value);
+	  }
+	}
+
+	labeler(5);
+	// OUTPUT: number=5
+
+	labeler('fish');
+	// OUTPUT: string=fish
+	
+ARROW FUNCTION
+
+	This is a function in arrow syntax that takes no parameters and always returns 3.
+	
+	() => 3;
+	
+	The following definitions are equal
+	
+	const a = [1, 2, 3, 4];
+
+	// standard function syntax
+	a.sort(function (v1, v2) {
+	  return v1 - v2;
+	});
+
+	// arrow function syntax
+	a.sort((v1, v2) => v1 - v2);
+	
+	RETURN VALUES
+	The return keyword is optional if no curly braces are provided for the function and it contains a single expression. In that case the result of the expression is automatically returned. If curly braces are provided then the arrow function behaves just like a standard function.
+	
+	() => 3;
+	// RETURNS: 3
+
+	() => {
+	  3;
+	};
+	// RETURNS: undefined
+
+	() => {
+	  return 3;
+	};
+	// RETURNS: 3
+	
+	THIS POINTER
+	
+	A closure allows a function to continue referencing its creation scope, even after it has passed out of that scope.
+	
+	function makeClosure(a) {
+	  a = 'a2';
+	  const b = 'b2';
+	  return () => [a, b];
+	}
+	
+	const a = 'a';
+	const b = 'b';
+
+	const closure = makeClosure(a);
+	
+	console.log(closure());
+	// OUTPUT: ['a2', 'b2']
+
+	console.log(a, b);
+	// OUTPUT: 'a' 'b'
+	
+	Closures provide a valuable property when we do things like execute JavaScript within the scope of an HTML page, because it can remember the values of variables when the function was created instead of what they are when they are executed.
+	
+ARRAYS
+
+	const a = [1, 2, 3];
+	console.log(a[1]);
+	// OUTPUT: 2
+
+	console.log(a.length);
+	// OUTPUT: 3
+	
+	push - add item end array 					a.push(4)
+	pop - Remove an item from the end of the array		x = a.pop
+	slice - return a sub-aray					a.slice(1,-1)
+	sort - Run a function sort an array in place			a.sort((a,b) => b-a)
+	values - Creates an iterator for use with a for of loop       for (i of a.values()) {...}
+	find - Find the first item satisfied by a test function	a.find(i => i < 2)
+	forEach - Run a function on each array item			a.forEach(console.log)
+	reduce - Run a function to reduce each array item to a single item     a.reduce((a, c) => a + c)
+	map - Run a function to map an array to a new array		a.map(i => i+i)
+	filter  - Run a function to remove items			a.filter(i => i%2)
+	every	Run a function to test if all items match		a.every(i => i < 3)
+	some	Run a function to test if any items match	a.some(i => 1 < 1)
+	
+	const a = [1, 2, 3];
+
+	console.log(a.map((i) => i + i));
+	// OUTPUT: [2,4,6]
+	console.log(a.reduce((v1, v2) => v1 + v2));
+	// OUTPUT: 6
+	console.log(a.sort((v1, v2) => v2 - v1));
+	// OUTPUT: [3,2,1]
+
+	a.push(4);
+	console.log(a.length);
+	// OUTPUT: 4
+	
+OBJECTS AND CLASSES
+
+	const obj = new Object();
+
+	obj.c = [1, 2, 3];
+	obj.hello = function () {
+	  console.log('hello');
+	};
+
+	console.log(obj);
+	// OUTPUT: {a: 3, b: 'fish', c: [1,2,3], hello: func}
+
+	OBJECT LITERALS
+	
+	const obj = {
+	  a: 3,
+	  b: 'fish',
+	};
+	
+	OBJECT FUNCTIONS
+		entries	Returns an array of key value pairs
+		keys	Returns an array of keys
+		values	Returns an array of values
+		const obj = {
+		  a: 3,
+		  b: 'fish',
+		};
+
+		console.log(Object.entries(obj));
+		// OUTPUT: [['a', 3], ['b', 'fish']]
+		console.log(Object.keys(obj));
+		// OUTPUT: ['a', 'b']
+		console.log(Object.values(obj));
+		// OUTPUT: [3, 'fish']
+	
+			
+	CONSTRUCTORS
+	
+		Any function that returns an object is considered a constructor and can be invoked with the new operator. Because objects can have any type of property value you can create methods on the object as part of its encapsulation.
 
 
+		function Person(name) {
+		  return {
+		    name: name,
+		    log: function () {
+		      console.log('My name is ' + this.name);
+		    },
+		  };
+		}
+		
+		const p = new Person('Eich');
+		p.log();
+		// OUTPUT: My name is Eich
+		
+	THIS POINTER
+	
+	context of an object it refers to a pointer to the object. 
+	
+	CLASSES
+	
+		You can use classes to define objects. Using a class clarifies the intent to create a reusable component rather than a one off object. Class declarations looks similar to declaring an object, but classes have an explicit constructor and assumed function declarations. 
+		
+		class Person {
+		  constructor(name) {
+		    this.name = name;
+		  }
+
+		  log() {
+		    console.log('My name is ' + this.name);
+		  }
+		}
+
+		const p = new Person('Eich');
+		p.log();
+		// OUTPUT: My name is Eich
+		
+		
+		#name // makes this private
+		
+	INHERITANCE
+		
+		Classes can be extended by using the extends keyword to define inheritance. Parameters that need to be passed to the parent class are delivered using the super function. Any functions defined on the child that have the same name as the parent override the parent's implementation. A parent's function can be explicitly accessed using the super keyword.
+		
+		class Person {
+		  constructor(name) {
+		    this.name = name;
+		  }
+
+		  print() {
+		    return 'My name is ' + this.name;
+		  }
+		}
+
+		class Employee extends Person {
+		  constructor(name, position) {
+		    super(name);
+		    this.position = position;
+		  }
+
+		  print() {
+		    return super.print() + '. I am a ' + this.position;
+		  }
+		}
+
+		const e = new Employee('Eich', 'programmer');
+		console.log(e.print());
+		// OUTPUT: My name is Eich. I am a programmer
+		
+		
+JSON 
+	JavaScript Object Notation (JSON). JSON provides a simple, and yet effective way, to share and store data. 
+	DATA TYPES
+		string	"crockford"
+		number	42
+		boolean	true
+		array	[null,42,"crockford"]
+		object	{"a":1,"b":"crockford"}
+		null	null
+		
+	EXAMPLE
+	
+		{
+		  "class": {
+		    "title": "web programming",
+		    "description": "Amazing"
+		  },
+		  "enrollment": ["Marco", "Jana", "فَاطِمَة"],
+		  "start": "2025-02-01",
+		  "end": null
+	CONVERTING
+		You can convert JSON to, and from, JavaScript using the JSON.parse and JSON.stringify functions.
+}
+		const obj = { a: 2, b: 'crockford', c: undefined };
+		const json = JSON.stringify(obj);
+		const objFromJson = JSON.parse(json);
+
+		console.log(obj, json, objFromJson);
+
+		// OUTPUT:
+		// {a: 2, b: 'crockford', c: undefined}
+		// {"a":2, "b":"crockford"}
+		// {a: 2, b: 'crockford'}
+		
+REGULAR EXPRESSIONS
+	you can think of them as textual pattern matchers. You use a regular expression to find text in a string so that you can replace it, or simply to know that it exists.
+	
+	const objRegex = new RegExp('ab*', 'i');
+	const literalRegex = /ab*/i;
+		
+	const petRegex = /(dog)|(cat)|(bird)/gim;
+	const text = 'Both cats and dogs are pets, but not rocks.';
+
+	text.match(petRegex);
+	// RETURNS: ['cat', 'dog']
+
+	text.replace(petRegex, 'animal');
+	// RETURNS: Both animals and animals are pets, but not rocks.
+
+	petRegex.test(text);
+	// RETURNS: true
+	
+REST
+	But JavaScript provides the rest syntax to make this easier. Think of it as a parameter that contains the rest of the parameters. To turn the last parameter of any function into a rest parameter you prefix it with three periods. You can then you can call it with any number of parameters and they are all automatically combined into an array.
+	
+	function hasNumber(test, ...numbers) {
+	  return numbers.some((i) => i === test);
+	}
+
+	hasNumber(2, 1, 2, 3);
+	// RETURNS: true
+	
+SPREAD
+
+	Spread does the opposite of rest. It take an object that is iterable (e.g. array or string) and expands it into a function's parameters. Consider the following.
+	
+	function person(firstName, lastName) {
+	  return { first: firstName, last: lastName };
+	}
+
+	const p = person(...['Ryan', 'Dahl']);
+	console.log(p);
+	// OUTPUT: {first: 'Ryan', last: 'Dahl'}
+	
+DESTRUCTURING
+	the process of pulling individual items out of an existing one, or removing structure. You can do this with either arrays or objects. This is helpful when you only care about a few items in the original structure.
+	
+	const a = [1, 2, 4, 5];
+
+	// destructure the first two items from a, into the new variables b and c
+	const [b, c] = a;
+
+	console.log(b, c);
+	// OUTPUT: 1, 2
+	
+EXCEPTIONS
+
+	JavaStript supports exception handling using the try catch and throw syntax. An exception can be triggered whenever your code generates an exception using the throw keyword, or whenever an exception is generated by the JavaScript runtime. 
+	try {
+	  // normal execution code
+	} catch (err) {
+	  // exception handling code
+	} finally {
+	  // always called code
+	}
+	
+	
+	function connectDatabase() {
+	  throw new Error('connection error');
+	}
+
+	try {
+	  connectDatabase();
+	  console.log('never executed');
+	} catch (err) {
+	  console.log(err);
+	} finally {
+	  console.log('always executed');
+	}
+
+	// OUTPUT: Error: connection error
+	//         always executed
+
+FALLBACKS
+
+	The fallback pattern is commonly implemented using exception handling. To implement the fallback pattern you put the normal feature path in a try block and then provide a fallback implementation in the catch block. 
+	
+	function getScores() {
+	  try {
+	    const scores = scoringService.getScores();
+	    // store the scores so that we can use them later if the network is not available
+	    window.localStorage.setItem('scores', scores);
+	    return scores;
+	  } catch {
+	    return window.localStorage.getItem('scores');
+	  }
+	}
+	
+SCOPE
+
+	JavaScript has four different types of scope:
+
+	Gobal - Visible to all code
+	Module - Visible to all code running in a module
+	Function - Visible within a function
+	Block - Visible within a block of code delimited by curly braces
+	
+	VAR ignores block scope
+	
+	THIS represents a variable that points to an object that contains the context within the scope of the currently executing line of code. (Global, Function, Object)
+	
+	CLOSURE
+	
+	A closure is defined as a function and its surrounding state. That means whatever variables are accessible when a function is created are available inside of that function. This holds true even if you pass the function outside of the scope of its original creation.
+	
+	globalThis.x = 'global';
+
+	const obj = {
+	  x: 'object',
+	  f: function () {
+	    console.log(this.x);
+	  },
+	};
+
+	obj.f();
+	// OUTPUT: object
+	
+MODULES
+
+	JavaScript modules allow for the partitioning and sharing of code. Because modules create a file based scope for the code they represent, you must explicitly export the objects that you want to be visible outside the module. For example, here is a simple module that exports a function that displays an alert. You can import the module's exported function into another module using the import keyword.
+	
+	export function alertDisplay(msg) {
+	  alert(msg);
+	}
+	
+	
+	import { alertDisplay } from './alert.js';
+	alertDisplay('called from main.js');
+	
+	INDEX.HTML
+	
+	<html>
+	  <body>
+	    <script type="module">
+	      import { alertDisplay } from './alert.js';
+	      window.btnClick = alertDisplay;
+	    </script>
+	    <button onclick="btnClick('called from index.html')">Press me</button>
+	  </body>
+	</html>
+	
+DOM
+
+	The Document Object Model (DOM) is an object representation of the HTML elements that the browser uses to render the display. The browser also exposes the DOM to external code so that you can write programs that dynamically manipulate the HTML.
+	
+	Every element in an HTML document implements the DOM Element interface, which is derived from the DOM Node interface. The DOM Element Interface provides the means for iterating child elements, accessing the parent element, and manipulating the element's attributes. From your JavaScript code, you can start with the document variable and walk through the every element in the tree.
+	
+	The DOM supports the ability insert, modify, or delete the elements in the DOM. To create a new element you first create the element on the DOM document. You then insert the new element into the DOM tree by appending it to an existing element in the tree.
+	
+	The DOM also allows you to inject entire blocks of HTML into an element. The following code finds the first div element in the DOM and replaces all the HTML it contains.
+	
+	All DOM elements support the ability to attach a function that gets called when an event occurs on the element. These functions are called event listeners. Here is an example of an event listener that gets called when an element gets clicked
+	
+PROMISES
+
+	JavaScript executes as a single threaded application. That means there is only ever one piece of code executing at the same time. However, the fact that it does not execute concurrently does not mean that it does not execute in parallel. You can asynchronously execute code with the use of a JavaScript Promise. Because the execution is asynchronous the promise object can be in one of three states at any given point in time.
+
+	pending - Currently running asynchronously
+	fulfilled - Completed successfully
+	rejected - Failed to complete\
+
+	const delay = (msg, wait) => {
+	  setTimeout(() => {
+	    console.log(msg, wait);
+	  }, 1000 * wait);
+	};
+
+	new Promise((resolve, reject) => {
+	  // Code executing in the promise
+	  for (let i = 0; i < 3; i++) {
+	    delay('In promise', i);
+	  }
+	});
+
+	// Code executing after the promise
+	for (let i = 0; i < 3; i++) {
+	  delay('After promise', i);
+	}
+
+	// OUTPUT:
+	//   In promise 0
+	//   After promise 0
+	//   In promise 1
+	//   After promise 1
+	//   In promise 2
+	//   After promise 2
+	
+ASYNC - AWAIT
+
+	JavaScript Promise objects are great for asynchronous execution, but as developers began build large systems with promises they started wanting a more concise representation. This was provided with the introduction of the async/await syntax. The await keyword wraps the execution of a promise and removed the need to chain functions. The await expression will block until the promise state moves to fulfilled, or throws an exception if the state moves to rejected. For example, if we have a function that returns a coin toss promise.
+	
+		const coinToss = () => {
+		  return new Promise((resolve, reject) => {
+		    setTimeout(() => {
+		      if (Math.random() > 0.1) {
+			resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+		      } else {
+			reject('fell off table');
+		      }
+		    }, 1000);
+		  });
+};
+
+	ASYNC
+	One important restriction for working with await is that you cannot call await unless it is called at the top level of the JavaScript, or is in a function that is defined with the async keyword. Applying the async keyword transforms the function so that it returns a promise that will resolve to the value that was previously returned by the function. Basically this turns any function into an asynchronous function, so that it can in turn make asynchronous requests.
+	
+	AWAIT
+	
+	the async keyword declares that a function returns a promise. The await keyword wraps a call to the async function, blocks execution until the promise has resolved, and then returns the result of the promise.
+
+We can demonstrate await in action with the cow promise from above. If we log the output from invoking cow then we see that the return value is a promise. However, if we prefix the call to the function with the await keyword, execution will stop until the promise has resolved, at which point the result of the promise is returned instead of the actual promise object.
+
+	TOGETHER
+	
+	You can see the benefit for async/await clearly by considering a case where multiple promises are required. For example, when calling the fetch web API on an endpoint that returns JSON, you would need to resolve two promises. One for the network call, and one for converting the result to JSON. A promise implementation would look like the following.
