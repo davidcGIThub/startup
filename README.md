@@ -56,7 +56,7 @@ application as well as usage and development notes. See the introduction for set
     
 5. Simon Html
 
-	Determining the content, inputs outputs, of a web page is all determined by the html code. The asesthetics have not been touched yet really.
+	Determining the content, inputs outputs, of a web page is all determined by the html code. The asesthetics have not been touched yet really. What is common for inputs and outputs is to have preceding label where for=" " identifies the ID of the input. The Simon pad was created by Using SVG graphics paired with an html table. The repeating headers and footers allow navigation between different parts of the webpage.
 
 
 
