@@ -54,7 +54,12 @@ application as well as usage and development notes. See the introduction for set
 
     The start of authority (SOA) record provides contact information about the owner of this domain name.
     
-    
+5. Simon Html
+
+	Determining the content, inputs outputs, of a web page is all determined by the html code. The asesthetics have not been touched yet really.
+
+
+
     
 MIDTERM NOTES
  
