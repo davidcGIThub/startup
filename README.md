@@ -91,6 +91,29 @@ text-align: center;
 ~ general sibling 
 + adjacent sibling 
 < child 
+
+7. Flex Practice
+
+to switch between flex directions you have to specify both 
+
+@media (orientation: portrait)
+{
+  main{
+    flex-direction: column;
+  }
+}
+
+@media (orientation: landscape)
+{
+  main{
+    flex-direction: row;
+  }
+}
+
+
+
+
+
     
 MIDTERM NOTES
  
