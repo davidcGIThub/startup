@@ -58,8 +58,39 @@ application as well as usage and development notes. See the introduction for set
 
 	Determining the content, inputs outputs, of a web page is all determined by the html code. The asesthetics have not been touched yet really. What is common for inputs and outputs is to have preceding label where for=" " identifies the ID of the input. The Simon pad was created by Using SVG graphics paired with an html table. The repeating headers and footers allow navigation between different parts of the webpage.
 
+6. CSS Practice
 
+/#   is used to select ID's 
+" " blank space is used to select types 
+.    Is used to select classes 
 
+To center something, for example a body 
+
+body{ 
+height: 50%; 
+width: 50%; 
+overflow: auto; 
+margin: auto; 
+position: absolute; 
+} 
+
+To center contents of body 
+ 
+div{ 
+margin-left: auto; 
+margin-right: auto; 
+width: inherit; 
+height: inherit 
+} 
+
+To center text 
+p{ 
+text-align: center; 
+} 
+
+~ general sibling 
++ adjacent sibling 
+< child 
     
 MIDTERM NOTES
  
