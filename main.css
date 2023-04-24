@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .logo_container {
+    width: 110px;
+    height: auto;
+  }
+  
+  #heading_bar{
+    flex: 1;
+    flex-direction: row;
+    justify-content: stretch;
+  }
+   
+  img.link-button {
+    width: 80px;
+    height:auto;
+  }
+  
+  #Events_Near_You{
+    display: flex; /*  want it to be a flexbox container*/ 
+    flex-direction: row;
+  }
+  
+  .logo {
+    width: 100%;
+    height: 100%
+  }
+  
+  html {
+    margin: 2rem;
+  }
+  
+  .demo-box {
+    margin: 1rem 0;
+    border: thin solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+  }
+  
+  .card > img {
+    height: 200px;
+    background: gray;
+  }
+  
